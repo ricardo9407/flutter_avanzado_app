@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'place.dart';
-import 'floating_action_button_green.dart';
+import '../../../Place/model/place.dart';
+import '../../../Widget/floating_action_button_green.dart';
 
 // ignore: must_be_immutable
 class ProfilePlaceInfo extends StatelessWidget {

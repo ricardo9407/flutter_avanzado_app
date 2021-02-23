@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'user_info.dart';
-import 'button_bar.dart';
+import '../widget/user_info.dart';
+import '../widget/button_bar.dart';
 
 class ProfileHeader extends StatelessWidget {
   @override

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'floating_action_button_green.dart';
+import '../../../Widget/floating_action_button_green.dart';
 
 // ignore: must_be_immutable
 class CardImage extends StatelessWidget {
