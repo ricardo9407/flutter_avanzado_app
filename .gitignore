@@ -41,5 +41,5 @@ app.*.symbols
 app.*.map.json
 
 # Images
-assets/image/*.jpg
-assets/image/*.jpeg
+assets/img/*.jpg
+assets/img/*.jpeg
