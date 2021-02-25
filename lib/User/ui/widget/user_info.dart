@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_avanzado_app/User/model/user.dart';
 
 // ignore: must_be_immutable
 class UserInfo extends StatelessWidget {
-  String imgProfile;
-  String name;
-  String email;
-  UserInfo(this.imgProfile, this.name, this.email);
+  User user;
+  // ignore: invalid_required_positional_param
+  UserInfo(@required this.user);
   @override
   Widget build(BuildContext context) {
     final userPhoto = Container(
@@ -17,7 +17,7 @@ class UserInfo extends StatelessWidget {
               color: Colors.white, width: 2.0, style: BorderStyle.solid),
           shape: BoxShape.circle,
           image: DecorationImage(
-              fit: BoxFit.cover, image: AssetImage(imgProfile))),
+              fit: BoxFit.cover, image: NetworkImage(user.photoURL))),
     );
 
     final userInfo = Column(
@@ -25,14 +25,14 @@ class UserInfo extends StatelessWidget {
       children: <Widget>[
         Container(
             margin: EdgeInsets.only(bottom: 5.0),
-            child: Text(name,
+            child: Text(user.name,
                 style: TextStyle(
                   fontSize: 18.0,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                   fontFamily: 'Lato',
                 ))),
-        Text(email,
+        Text(user.email,
             style: TextStyle(
                 fontSize: 15.0, color: Colors.white30, fontFamily: 'Lato')),
       ],

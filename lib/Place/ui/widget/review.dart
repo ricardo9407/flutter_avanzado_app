@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class Review extends StatelessWidget {
-  String pathImage = "assets/img/people.jpg";
-  String name = "Varuna Yasas";
-  String details = "1 review · 5 photos";
-  String comment = "There is an amazing place in Sri Lanka";
+  String pathImage;
+  String name;
+  String details;
+  String comment;
   Review(this.pathImage, this.name, this.details, this.comment);
   @override
   Widget build(BuildContext context) {

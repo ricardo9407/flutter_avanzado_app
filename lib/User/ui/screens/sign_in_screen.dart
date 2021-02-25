@@ -1,9 +1,8 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_avanzado_app/User/bloc/bloc_user.dart';
 import 'package:flutter_avanzado_app/Widget/gradient_back.dart';
 import 'package:flutter_avanzado_app/Widget/button_green.dart';
-import 'package:flutter_avanzado_app/platzi_trips.dart';
+import 'package:flutter_avanzado_app/platzi_trips_cupertino.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
 class SignInScreen extends StatefulWidget {
@@ -34,7 +33,7 @@ class _SignInScreen extends State<SignInScreen> {
         if (!snapshot.hasData || snapshot.hasError) {
           return signInGoogleUI();
         } else {
-          return PlatziTrips();
+          return PlatziTripsCupertino();
         }
       },
     );
@@ -58,8 +57,8 @@ class _SignInScreen extends State<SignInScreen> {
               ButtonGreen(
                 text: "Login with Gmail",
                 onPressed: () {
-                  userBloc.signIn().then((UserCredential user) =>
-                      print("El usuario es ${user.user.displayName}"));
+                  userBloc.signOut();
+                  userBloc.signIn();
                 },
                 width: 300.0,
                 height: 50.0,
