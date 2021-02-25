@@ -4,4 +4,5 @@ import 'firebase_auth_api.dart';
 class AuthRepository {
   final _firebaseAuthAPI = FirebaseAuthAPI();
   Future<UserCredential> signInFirebase() => _firebaseAuthAPI.sigIn();
+  signOut() => _firebaseAuthAPI.signOut();
 }
