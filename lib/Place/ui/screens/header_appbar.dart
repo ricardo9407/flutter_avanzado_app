@@ -8,7 +8,7 @@ class HeaderAppBar extends StatelessWidget {
     // ignore: todo
     // TODO: implement build
     return Stack(
-      children: <Widget>[GradientBack("Bienvenido", 250.0), CardImageList()],
+      children: <Widget>[GradientBack(height: 250.0), CardImageList()],
     );
   }
 }
