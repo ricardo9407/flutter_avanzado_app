@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_avanzado_app/Widget/gradient_back.dart';
+import 'package:flutter_avanzado_app/Widget/title_header.dart';
 
 // ignore: must_be_immutable
 class AddPlaceScreen extends StatefulWidget {
@@ -36,7 +37,12 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
                         onPressed: () {
                           Navigator.pop(context);
                         }),
-                  ))
+                  )),
+              Flexible(
+                  child: Container(
+                      padding:
+                          EdgeInsets.only(top: 45.0, left: 20.0, right: 10.0),
+                      child: TitleHeader(title: "Add a new Place")))
             ],
           )
         ],
