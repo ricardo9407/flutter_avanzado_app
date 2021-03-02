@@ -55,7 +55,7 @@ class _SignInScreen extends State<SignInScreen> {
               Flexible(
                 child: Container(
                   width: screenWidth,
-                  child: Text("Welcome \n This is your Travel App",
+                  child: Text("  Welcome \n  This is your Travel App",
                       style: TextStyle(
                           fontSize: 37.0,
                           fontFamily: "Lato",
