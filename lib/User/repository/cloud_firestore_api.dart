@@ -10,8 +10,7 @@ class CloudFirestoreAPI {
   final FirebaseFirestore _db = FirebaseFirestore.instance;
 
   void updateUserData(User user) async {
-    CollectionReference users = _db.collection(USERS);
-    DocumentReference ref = users.doc(user.uid);
+    DocumentReference ref = _db.collection(USERS).doc(user.uid);
     return ref.set({
       'uid': user.uid,
       'name': user.name,

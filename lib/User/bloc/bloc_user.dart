@@ -14,7 +14,7 @@ class UserBloc implements Bloc {
   Stream<User> get authStatus => streamFirebase;
   //Casos de uso
   //1. SingIn a la aplicación Google
-  Future<UserCredential> signIn() {
+  Future<User> signIn() {
     return _auth_repository.signInFirebase();
   }
 

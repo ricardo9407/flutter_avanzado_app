@@ -60,12 +60,12 @@ class _SignInScreen extends State<SignInScreen> {
                 text: "Login with Gmail",
                 onPressed: () {
                   userBloc.signOut();
-                  userBloc.signIn().then((UserCredential user) {
+                  userBloc.signIn().then((User user) {
                     userBloc.updateUserData(Model.User(
-                        uid: user.user.uid,
-                        name: user.user.displayName,
-                        email: user.user.email,
-                        photoURL: user.user.photoURL));
+                        uid: user.uid,
+                        name: user.displayName,
+                        email: user.email,
+                        photoURL: user.photoURL));
                   });
                 },
                 width: 300.0,
