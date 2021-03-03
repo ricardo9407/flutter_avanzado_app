@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_avanzado_app/Widget/gradient_back.dart';
+import 'package:flutter_avanzado_app/Widget/text_input.dart';
 import 'package:flutter_avanzado_app/Widget/title_header.dart';
 
 // ignore: must_be_immutable
@@ -20,12 +21,15 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
   Widget build(BuildContext context) {
     // ignore: todo
     // TODO: implement build
+    final _controllerTitlePlace = TextEditingController();
+    final _controllerDescriptionPlace = TextEditingController();
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: <Widget>[
           GradientBack(height: 300.0),
           Row(
+            //App Bar
             children: <Widget>[
               Container(
                   padding: EdgeInsets.only(top: 25.0, left: 5.0),
@@ -48,6 +52,28 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
                           padding: EdgeInsets.only(
                               top: 45.0, left: 20.0, right: 10.0))))
             ],
+          ),
+          Container(
+            margin: EdgeInsets.only(top: 120.0, bottom: 20.0),
+            child: ListView(
+              children: <Widget>[
+                Container(), //Foto
+                Container(
+                  margin: EdgeInsets.only(bottom: 20.0),
+                  child: TextInput(
+                    hintText: "Title",
+                    inputType: null,
+                    maxLine: 1,
+                    controller: _controllerTitlePlace,
+                  ),
+                ),
+                TextInput(
+                    hintText: "Description",
+                    inputType: TextInputType.multiline,
+                    maxLine: 4,
+                    controller: _controllerDescriptionPlace)
+              ],
+            ),
           )
         ],
       ),
