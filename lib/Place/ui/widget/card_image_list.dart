@@ -9,14 +9,44 @@ class CardImageList extends StatelessWidget {
     return Container(
       height: 350.0,
       child: ListView(
-        padding: EdgeInsets.all(25.0),
+        padding: EdgeInsets.only(left: 10.0, bottom: 25.0),
         scrollDirection: Axis.horizontal,
         children: <Widget>[
-          CardImage("assets/img/beach_palm.jpeg"),
-          CardImage("assets/img/mountain.jpeg"),
-          CardImage("assets/img/mountain_stars.jpeg"),
-          CardImage("assets/img/river.jpeg"),
-          CardImage("assets/img/sunset.jpeg"),
+          CardImageWithFabIcon(
+              pathImage: "assets/img/beach_palm.jpeg",
+              width: 350,
+              height: 250,
+              left: 20.0,
+              iconData: Icons.favorite_border,
+              onPressedFabIcon: null),
+          CardImageWithFabIcon(
+              pathImage: "assets/img/mountain.jpeg",
+              width: 350,
+              height: 250,
+              left: 20.0,
+              iconData: Icons.favorite_border,
+              onPressedFabIcon: null),
+          CardImageWithFabIcon(
+              pathImage: "assets/img/mountain_stars.jpeg",
+              width: 350,
+              height: 250,
+              left: 20.0,
+              iconData: Icons.favorite_border,
+              onPressedFabIcon: null),
+          CardImageWithFabIcon(
+              pathImage: "assets/img/river.jpeg",
+              width: 350,
+              height: 250,
+              left: 20.0,
+              iconData: Icons.favorite_border,
+              onPressedFabIcon: null),
+          CardImageWithFabIcon(
+              pathImage: "assets/img/sunset.jpeg",
+              width: 350,
+              height: 250,
+              left: 20.0,
+              iconData: Icons.favorite_border,
+              onPressedFabIcon: null),
         ],
       ),
     );

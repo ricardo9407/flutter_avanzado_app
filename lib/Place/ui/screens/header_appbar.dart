@@ -14,7 +14,7 @@ class HeaderAppBar extends StatelessWidget {
         TitleHeader(
             title: "Popular",
             tamanio: 30.0,
-            padding: EdgeInsets.only(top: 45.0, left: 20.0, right: 10.0)),
+            padding: EdgeInsets.only(top: 35.0, left: 20.0, right: 10.0)),
         CardImageList()
       ],
     );

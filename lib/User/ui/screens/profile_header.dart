@@ -10,9 +10,11 @@ import '../widget/button_bar.dart';
 class ProfileHeader extends StatelessWidget {
   UserBloc userBloc;
   User user;
+  double screenWidth;
   @override
   Widget build(BuildContext context) {
     userBloc = BlocProvider.of<UserBloc>(context);
+    screenWidth = MediaQuery.of(context).size.width;
     return StreamBuilder(
         stream: userBloc.streamFirebase,
         // ignore: missing_return
@@ -54,10 +56,12 @@ class ProfileHeader extends StatelessWidget {
             Row(
               children: <Widget>[
                 Flexible(
-                    child: TitleHeader(
-                        title: "Profile",
-                        tamanio: 30.0,
-                        padding: EdgeInsets.only(left: 10.0, right: 10.0)))
+                    child: Container(
+                        width: screenWidth,
+                        child: TitleHeader(
+                            title: "Profile",
+                            tamanio: 30.0,
+                            padding: EdgeInsets.only(left: 10.0, right: 10.0))))
               ],
             ),
             UserInfo(user),

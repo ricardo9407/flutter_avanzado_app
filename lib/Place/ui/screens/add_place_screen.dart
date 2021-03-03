@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_avanzado_app/Place/ui/widget/card_image.dart';
 import 'package:flutter_avanzado_app/Place/ui/widget/title_input_location.dart';
 import 'package:flutter_avanzado_app/Widget/gradient_back.dart';
 import 'package:flutter_avanzado_app/Widget/text_input.dart';
@@ -55,12 +56,22 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
             ],
           ),
           Container(
-            margin: EdgeInsets.only(top: 120.0, bottom: 20.0),
+            margin: EdgeInsets.only(top: 100.0, bottom: 20.0),
             child: ListView(
               children: <Widget>[
-                Container(), //Foto
                 Container(
-                  margin: EdgeInsets.only(bottom: 20.0),
+                  alignment: Alignment.center,
+                  child: CardImageWithFabIcon(
+                      pathImage:
+                          "assets/img/beach_palm.jpeg", //widget.image.path,
+                      width: 400.0,
+                      height: 250.0,
+                      left: 0.1,
+                      iconData: Icons.camera_alt,
+                      onPressedFabIcon: null),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
                   child: TextInput(
                     hintText: "Title",
                     inputType: null,
