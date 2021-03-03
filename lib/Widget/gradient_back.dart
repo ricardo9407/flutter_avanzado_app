@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
 class GradientBack extends StatelessWidget {
-  String title = "Popular";
-  double height = 0.0;
+  double height;
   GradientBack({Key key, this.height}); //height = nell full screen
   @override
   Widget build(BuildContext context) {
@@ -35,15 +34,6 @@ class GradientBack extends StatelessWidget {
               borderRadius: BorderRadius.circular(screenHeight / 2)),
         ),
       ),
-      /*Text(
-        title,
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: 30.0,
-            fontFamily: "Lato",
-            fontWeight: FontWeight.bold),
-      )*/
-      //alignment: Alignment(-0.9, -0.6),
     );
   }
 }

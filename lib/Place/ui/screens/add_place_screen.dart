@@ -20,6 +20,7 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
   Widget build(BuildContext context) {
     // ignore: todo
     // TODO: implement build
+    double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -40,9 +41,12 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
                   )),
               Flexible(
                   child: Container(
-                      padding:
-                          EdgeInsets.only(top: 45.0, left: 20.0, right: 10.0),
-                      child: TitleHeader(title: "Add a new Place")))
+                      width: screenWidth,
+                      child: TitleHeader(
+                          title: "Add a new Place",
+                          tamanio: 30.0,
+                          padding: EdgeInsets.only(
+                              top: 45.0, left: 20.0, right: 10.0))))
             ],
           )
         ],

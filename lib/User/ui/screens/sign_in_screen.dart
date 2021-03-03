@@ -4,6 +4,7 @@ import 'package:flutter_avanzado_app/User/bloc/bloc_user.dart';
 import 'package:flutter_avanzado_app/User/model/user.dart' as Model;
 import 'package:flutter_avanzado_app/Widget/gradient_back.dart';
 import 'package:flutter_avanzado_app/Widget/button_green.dart';
+import 'package:flutter_avanzado_app/Widget/title_header.dart';
 import 'package:flutter_avanzado_app/platzi_trips_cupertino.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
@@ -55,12 +56,11 @@ class _SignInScreen extends State<SignInScreen> {
               Flexible(
                 child: Container(
                   width: screenWidth,
-                  child: Text("  Welcome \n  This is your Travel App",
-                      style: TextStyle(
-                          fontSize: 37.0,
-                          fontFamily: "Lato",
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold)),
+                  child: TitleHeader(
+                      title: "Welcome\nThis is your Travel App",
+                      tamanio: 40.0,
+                      padding:
+                          EdgeInsets.only(top: 45.0, left: 20.0, right: 10.0)),
                 ),
               ),
               ButtonGreen(
