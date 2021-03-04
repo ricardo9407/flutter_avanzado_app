@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_avanzado_app/Place/model/place.dart';
 import 'package:flutter_avanzado_app/User/model/user.dart' as Model;
 import 'package:flutter_avanzado_app/User/repository/cloud_firestore_repository.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
@@ -14,18 +15,19 @@ class UserBloc implements Bloc {
   Stream<User> get authStatus => streamFirebase;
   //Casos de uso
   //1. SingIn a la aplicación Google
-  Future<User> signIn() {
-    return _auth_repository.signInFirebase();
-  }
+  Future<User> signIn() => _auth_repository.signInFirebase();
 
-  //2. Registrar usuario en base de datos
+  //2. SignOut a la aplicación Google
+  signOut() => _auth_repository.signOut();
+
+  //3. Registrar usuario en base de datos
   final _cloudFirestoreRepository = CloudFirestoreRepository();
   void updateUserData(Model.User user) =>
       _cloudFirestoreRepository.updateUserDataFirestore(user);
 
-  signOut() {
-    _auth_repository.signOut();
-  }
+  //4. Registrar lugar en base de datos
+  Future<void> updatePlaceData(Place place) =>
+      _cloudFirestoreRepository.updatePlaceData(place);
 
   @override
   void dispose() {

@@ -1,11 +1,14 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_avanzado_app/Place/model/place.dart';
 import 'package:flutter_avanzado_app/Place/ui/widget/card_image.dart';
 import 'package:flutter_avanzado_app/Place/ui/widget/title_input_location.dart';
+import 'package:flutter_avanzado_app/User/bloc/bloc_user.dart';
 import 'package:flutter_avanzado_app/Widget/button_purple.dart';
 import 'package:flutter_avanzado_app/Widget/gradient_back.dart';
 import 'package:flutter_avanzado_app/Widget/text_input.dart';
 import 'package:flutter_avanzado_app/Widget/title_header.dart';
+import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
 // ignore: must_be_immutable
 class AddPlaceScreen extends StatefulWidget {
@@ -20,12 +23,13 @@ class AddPlaceScreen extends StatefulWidget {
 }
 
 class _AddPlaceScreen extends State<AddPlaceScreen> {
+  final _controllerTitlePlace = TextEditingController();
+  final _controllerDescriptionPlace = TextEditingController();
   @override
   Widget build(BuildContext context) {
     // ignore: todo
     // TODO: implement build
-    final _controllerTitlePlace = TextEditingController();
-    final _controllerDescriptionPlace = TextEditingController();
+    UserBloc userBloc = BlocProvider.of<UserBloc>(context);
     double screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
       body: Stack(
@@ -101,6 +105,15 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
                       url -
                       2. Cloud Firestore
                       Place - title, description, url, userOwner, likes*/
+                      userBloc
+                          .updatePlaceData(Place(
+                              name: _controllerTitlePlace.text,
+                              description: _controllerDescriptionPlace.text,
+                              likes: 0))
+                          .whenComplete(() {
+                        print("TERMINADO");
+                        Navigator.pop(context);
+                      });
                     },
                   ),
                 )
