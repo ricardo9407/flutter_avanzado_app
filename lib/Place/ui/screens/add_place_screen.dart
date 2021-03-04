@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_avanzado_app/Place/ui/widget/card_image.dart';
 import 'package:flutter_avanzado_app/Place/ui/widget/title_input_location.dart';
+import 'package:flutter_avanzado_app/Widget/button_purple.dart';
 import 'package:flutter_avanzado_app/Widget/gradient_back.dart';
 import 'package:flutter_avanzado_app/Widget/text_input.dart';
 import 'package:flutter_avanzado_app/Widget/title_header.dart';
@@ -90,6 +91,18 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
                       hintText: "Add Location",
                       iconData: Icons.location_on,
                       controller: null),
+                ),
+                Container(
+                  width: 70.0,
+                  child: ButtonPurple(
+                    buttonText: "Add Place",
+                    onPressed: () {
+                      /*1. Firebase Storage
+                      url -
+                      2. Cloud Firestore
+                      Place - title, description, url, userOwner, likes*/
+                    },
+                  ),
                 )
               ],
             ),
