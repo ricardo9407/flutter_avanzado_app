@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_avanzado_app/Place/ui/screens/add_place_screen.dart';
 import 'package:flutter_avanzado_app/User/bloc/bloc_user.dart';
+import 'package:flutter_avanzado_app/User/ui/screens/profile_trips.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:image_picker/image_picker.dart';
 import 'circle_button.dart';
@@ -26,11 +27,15 @@ class ButtonsBar extends StatelessWidget {
               ImagePicker.platform
                   .pickImage(source: ImageSource.camera)
                   .then((PickedFile image) {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (BuildContext context) =>
-                            AddPlaceScreen(image: File(image.path))));
+                if (image != null) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (BuildContext context) =>
+                              AddPlaceScreen(image: File(image.path))));
+                } else {
+                  ProfileTrips();
+                }
               })
                   // ignore: return_of_invalid_type_from_catch_error
                   .catchError((onError) => print(onError));
