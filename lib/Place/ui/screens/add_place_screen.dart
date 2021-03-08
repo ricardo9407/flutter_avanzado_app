@@ -1,4 +1,6 @@
 import 'dart:io';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_avanzado_app/Place/model/place.dart';
 import 'package:flutter_avanzado_app/Place/ui/widget/card_image.dart';
@@ -100,18 +102,40 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
                   child: ButtonPurple(
                     buttonText: "Add Place",
                     onPressed: () {
-                      /*1. Firebase Storage
-                      url -
-                      2. Cloud Firestore
-                      Place - title, description, url, userOwner, likes*/
-                      userBloc
-                          .updatePlaceData(Place(
-                              name: _controllerTitlePlace.text,
-                              description: _controllerDescriptionPlace.text,
-                              likes: 0))
-                          .whenComplete(() {
-                        print("TERMINADO");
-                        Navigator.pop(context);
+                      //1. Firebase Storage
+                      //url - ID del usuario logeado actualmente
+                      userBloc.currentUser().then((User user) {
+                        if (user != null) {
+                          String uid = user.uid;
+                          String path =
+                              // ignore: unnecessary_brace_in_string_interps
+                              "${uid}/${DateTime.now().toString()}.jpg";
+                          userBloc
+                              .uploadFile(path, widget.image)
+                              .then((UploadTask uploadTask) {
+                            uploadTask
+                                .whenComplete(() {})
+                                .then((TaskSnapshot snapshot) {
+                              snapshot.ref.getDownloadURL().then((urlImage) {
+                                // ignore: unnecessary_brace_in_string_interps
+                                print("URLIMAGE: ${urlImage}");
+                                //2. Cloud Firestore
+                                //Place - title, description, url, userOwner, likes
+                                userBloc
+                                    .updatePlaceData(Place(
+                                        name: _controllerTitlePlace.text,
+                                        description:
+                                            _controllerDescriptionPlace.text,
+                                        urlImage: urlImage,
+                                        likes: 0))
+                                    .whenComplete(() {
+                                  print("TERMINADO");
+                                  Navigator.pop(context);
+                                });
+                              });
+                            });
+                          });
+                        }
                       });
                     },
                   ),
