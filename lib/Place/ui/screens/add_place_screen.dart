@@ -1,6 +1,4 @@
 import 'dart:io';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_avanzado_app/Place/model/place.dart';
 import 'package:flutter_avanzado_app/Place/ui/widget/card_image.dart';
@@ -104,38 +102,29 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
                     onPressed: () {
                       //1. Firebase Storage
                       //url - ID del usuario logeado actualmente
-                      userBloc.currentUser().then((User user) {
-                        if (user != null) {
-                          String uid = user.uid;
-                          String path =
-                              // ignore: unnecessary_brace_in_string_interps
-                              "${uid}/${DateTime.now().toString()}.jpg";
-                          userBloc
-                              .uploadFile(path, widget.image)
-                              .then((UploadTask uploadTask) {
-                            uploadTask
-                                .whenComplete(() {})
-                                .then((TaskSnapshot snapshot) {
-                              snapshot.ref.getDownloadURL().then((urlImage) {
-                                // ignore: unnecessary_brace_in_string_interps
-                                print("URLIMAGE: ${urlImage}");
-                                //2. Cloud Firestore
-                                //Place - title, description, url, userOwner, likes
-                                userBloc
-                                    .updatePlaceData(Place(
-                                        name: _controllerTitlePlace.text,
-                                        description:
-                                            _controllerDescriptionPlace.text,
-                                        urlImage: urlImage,
-                                        likes: 0))
-                                    .whenComplete(() {
-                                  print("TERMINADO");
-                                  Navigator.pop(context);
-                                });
-                              });
-                            });
-                          });
-                        }
+                      String uid = userBloc.currentUser.uid;
+                      // ignore: unnecessary_brace_in_string_interps
+                      String path = "${uid}/${DateTime.now().toString()}.jpg";
+                      final uploading = userBloc.uploadFile(path, widget.image);
+                      //Subir foto de la camara
+                      uploading.then((urlImage) {
+                        // ignore: unnecessary_brace_in_string_interps
+                        print("=====Devuelve url imagen===== ${urlImage}");
+                        //Guardar datos en BD
+                        userBloc
+                            .updatePlaceData(Place(
+                                name: _controllerTitlePlace.text,
+                                description: _controllerDescriptionPlace.text,
+                                urlImage: urlImage.toString(),
+                                likes: 0))
+                            .then((value) {
+                          print("=====Terminó de guerdar el nuevo lugar=====");
+                          Navigator.pop(context);
+                        });
+                      }).catchError((onError) {
+                        print(
+                            // ignore: unnecessary_brace_in_string_interps
+                            "=====Error al guardar el nuevo lugar===== ${onError}");
                       });
                     },
                   ),

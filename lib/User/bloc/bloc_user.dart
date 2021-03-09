@@ -15,10 +15,7 @@ class UserBloc implements Bloc {
   //StreamController
   Stream<User> streamFirebase = FirebaseAuth.instance.authStateChanges();
   Stream<User> get authStatus => streamFirebase;
-  /*Future<User>*/ currentUser() async {
-    User user = currentUser as User;
-    return user;
-  }
+  User get currentUser => FirebaseAuth.instance.currentUser;
 
   //Casos de uso
   //1. SingIn a la aplicación Google
