@@ -10,27 +10,32 @@ class ProfilePlacesList extends StatelessWidget {
   Widget build(BuildContext context) {
     userBloc = BlocProvider.of<UserBloc>(context);
     return Container(
-        margin:
-            EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0, bottom: 10.0),
-        child: StreamBuilder<QuerySnapshot>(
-            stream: userBloc.placesStream,
-            // ignore: missing_return
-            builder: (context, AsyncSnapshot snapshot) {
-              switch (snapshot.connectionState) {
-                case ConnectionState.waiting:
-                  return CircularProgressIndicator();
-                case ConnectionState.done:
-                  return Column(
-                      children: userBloc.buildPlaces(snapshot.data.docs));
-                case ConnectionState.active:
-                  return Column(
-                      children: userBloc.buildPlaces(snapshot.data.docs));
-                case ConnectionState.none:
-                  return CircularProgressIndicator();
-                default:
-                  return Column(
-                      children: userBloc.buildPlaces(snapshot.data.docs));
-              }
-            }));
+      height: 450.0,
+      margin: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0, bottom: 10.0),
+      child: ListView(
+        children: <Widget>[
+          StreamBuilder<QuerySnapshot>(
+              stream: userBloc.placesStream,
+              // ignore: missing_return
+              builder: (context, AsyncSnapshot snapshot) {
+                switch (snapshot.connectionState) {
+                  case ConnectionState.waiting:
+                    return CircularProgressIndicator();
+                  case ConnectionState.done:
+                    return Column(
+                        children: userBloc.buildPlaces(snapshot.data.docs));
+                  case ConnectionState.active:
+                    return Column(
+                        children: userBloc.buildPlaces(snapshot.data.docs));
+                  case ConnectionState.none:
+                    return CircularProgressIndicator();
+                  default:
+                    return Column(
+                        children: userBloc.buildPlaces(snapshot.data.docs));
+                }
+              })
+        ],
+      ),
+    );
   }
 }
