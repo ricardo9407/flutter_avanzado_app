@@ -6,6 +6,7 @@ import 'package:flutter_avanzado_app/Place/repository/firebase_storage_repositor
 import 'package:flutter_avanzado_app/User/model/user.dart' as Model;
 import 'package:flutter_avanzado_app/User/repository/cloud_firestore_api.dart';
 import 'package:flutter_avanzado_app/User/repository/cloud_firestore_repository.dart';
+import 'package:flutter_avanzado_app/User/ui/widget/profile_place.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 import 'package:flutter_avanzado_app/User/repository/auth_repository.dart';
 
@@ -17,7 +18,11 @@ class UserBloc implements Bloc {
   //StreamController
   Stream<User> streamFirebase = FirebaseAuth.instance.authStateChanges();
   Stream<User> get authStatus => streamFirebase;
-  User get currentUser => FirebaseAuth.instance.currentUser;
+  // ignore: missing_return
+  Future<User> currentUser() async {
+    User user = FirebaseAuth.instance.currentUser;
+    return user;
+  }
 
   //Casos de uso
   //1. SingIn a la aplicación Google
@@ -39,6 +44,8 @@ class UserBloc implements Bloc {
       .collection(CloudFirestoreAPI().PLACES)
       .snapshots();
   Stream<QuerySnapshot> get placesStream => placesListStream;
+  List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesSnapshot) =>
+      _cloudFirestoreRepository.buildPlaces(placesSnapshot);
 
   final _firebaseStorageRepository = FirebaseStorageRepository();
   uploadFile(String path, File image) =>

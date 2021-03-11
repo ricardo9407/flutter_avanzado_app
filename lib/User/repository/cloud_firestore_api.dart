@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
 import 'package:flutter_avanzado_app/Place/model/place.dart';
 import 'package:flutter_avanzado_app/User/model/user.dart';
+import 'package:flutter_avanzado_app/User/ui/widget/profile_place.dart';
 
 class CloudFirestoreAPI {
   // ignore: non_constant_identifier_names
@@ -47,5 +48,16 @@ class CloudFirestoreAPI {
             "=====Error al generar la referencia===== ${onError}");
       });
     });
+  }
+
+  List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesSnapshot) {
+    List<ProfilePlace> profilePlaces = [];
+    placesSnapshot.forEach((p) {
+      profilePlaces.add(ProfilePlace(Place(
+          name: p.data()['name'],
+          description: p.data()['description'],
+          urlImage: p.data()['urlImage'])));
+    });
+    return profilePlaces;
   }
 }
