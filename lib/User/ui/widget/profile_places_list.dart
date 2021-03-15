@@ -1,11 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_avanzado_app/User/bloc/bloc_user.dart';
+import 'package:flutter_avanzado_app/User/model/user.dart';
 import 'package:generic_bloc_provider/generic_bloc_provider.dart';
 
 // ignore: must_be_immutable
 class ProfilePlacesList extends StatelessWidget {
   UserBloc userBloc;
+  User user;
+  // ignore: invalid_required_positional_param
+  ProfilePlacesList(@required this.user);
   @override
   Widget build(BuildContext context) {
     userBloc = BlocProvider.of<UserBloc>(context);
@@ -15,7 +19,7 @@ class ProfilePlacesList extends StatelessWidget {
       child: ListView(
         children: <Widget>[
           StreamBuilder<QuerySnapshot>(
-              stream: userBloc.placesStream,
+              stream: userBloc.myPlacesListStream(user.uid),
               // ignore: missing_return
               builder: (context, AsyncSnapshot snapshot) {
                 switch (snapshot.connectionState) {
