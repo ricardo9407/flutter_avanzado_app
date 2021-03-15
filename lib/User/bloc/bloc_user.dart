@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_avanzado_app/Place/model/place.dart';
 import 'package:flutter_avanzado_app/Place/repository/firebase_storage_repository.dart';
+import 'package:flutter_avanzado_app/Place/ui/widget/card_image.dart';
 import 'package:flutter_avanzado_app/User/model/user.dart' as Model;
 import 'package:flutter_avanzado_app/User/repository/cloud_firestore_api.dart';
 import 'package:flutter_avanzado_app/User/repository/cloud_firestore_repository.dart';
@@ -44,8 +45,9 @@ class UserBloc implements Bloc {
       .collection(CloudFirestoreAPI().PLACES)
       .snapshots();
   Stream<QuerySnapshot> get placesStream => placesListStream;
-  List<ProfilePlace> buildPlaces(List<DocumentSnapshot> placesSnapshot) =>
-      _cloudFirestoreRepository.buildPlaces(placesSnapshot);
+  List<CardImageWithFabIcon> buildPlaces(
+          List<DocumentSnapshot> placesListSnapshot) =>
+      _cloudFirestoreRepository.buildPlaces(placesListSnapshot);
   Stream<QuerySnapshot> myPlacesListStream(String uid) =>
       FirebaseFirestore.instance
           .collection(CloudFirestoreAPI().PLACES)
@@ -54,6 +56,8 @@ class UserBloc implements Bloc {
                   // ignore: unnecessary_brace_in_string_interps
                   .doc("${CloudFirestoreAPI().USERS}/${uid}"))
           .snapshots();
+  List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesSnapshot) =>
+      _cloudFirestoreRepository.buildMyPlaces(placesSnapshot);
 
   final _firebaseStorageRepository = FirebaseStorageRepository();
   uploadFile(String path, File image) =>
