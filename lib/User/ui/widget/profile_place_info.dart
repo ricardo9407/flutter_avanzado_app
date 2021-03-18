@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import '../../../Place/model/place.dart';
-import '../../../Widget/floating_action_button_green.dart';
 
 // ignore: must_be_immutable
 class ProfilePlaceInfo extends StatelessWidget {
@@ -53,18 +52,10 @@ class ProfilePlaceInfo extends StatelessWidget {
       child: Padding(
           padding: EdgeInsets.all(15.0),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[place, placeInfo, steps],
-          )),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[place, placeInfo, steps])),
     );
 
-    return Stack(
-      alignment: Alignment(0.8, 1.25),
-      children: <Widget>[
-        card,
-        FloatingActionButtonGreen(
-            iconData: Icons.favorite_border, onPressed: () {})
-      ],
-    );
+    return Stack(alignment: Alignment(0.8, 1.25), children: <Widget>[card]);
   }
 }

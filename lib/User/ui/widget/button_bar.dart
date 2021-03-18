@@ -27,13 +27,16 @@ class ButtonsBar extends StatelessWidget {
               ImagePicker.platform
                   .pickImage(source: ImageSource.camera)
                   .then((PickedFile image) {
+                //Se valida la imagen
                 if (image != null) {
+                  //Si se obtiene una imagen se abre la pantalla de AddPlaceScreen
                   Navigator.push(
                       context,
                       MaterialPageRoute(
                           builder: (BuildContext context) =>
                               AddPlaceScreen(image: File(image.path))));
                 } else {
+                  //En el caso contrario se vuelve a ProfileTrips
                   ProfileTrips();
                 }
               })

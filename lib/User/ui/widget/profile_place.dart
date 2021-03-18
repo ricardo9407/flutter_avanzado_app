@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import '../../../Place/model/place.dart';
 import 'profile_place_info.dart';
@@ -13,9 +14,10 @@ class ProfilePlace extends StatelessWidget {
       height: 220.0,
       decoration: BoxDecoration(
           image: DecorationImage(
-              fit: BoxFit.cover, image: NetworkImage(place.urlImage)),
+              fit: BoxFit.cover,
+              image: CachedNetworkImageProvider(place.urlImage)),
           borderRadius: BorderRadius.all(Radius.circular(20.0)),
-          color: Colors.red,
+          color: Colors.transparent,
           boxShadow: <BoxShadow>[
             BoxShadow(
                 color: Colors.black38,

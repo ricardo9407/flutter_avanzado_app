@@ -1,9 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' as auth;
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_avanzado_app/Place/model/place.dart';
-import 'package:flutter_avanzado_app/Place/ui/widget/card_image.dart';
 import 'package:flutter_avanzado_app/User/model/user.dart';
 import 'package:flutter_avanzado_app/User/ui/widget/profile_place.dart';
 
@@ -65,22 +62,43 @@ class CloudFirestoreAPI {
     return profilePlaces;
   }
 
-  List<CardImageWithFabIcon> buildPlaces(
-      List<DocumentSnapshot> placesListSnapshot) {
-    List<CardImageWithFabIcon> placesCard = [];
-    double width = 300.0;
-    double height = 250.0;
-    double left = 20.0;
-    IconData iconData = Icons.favorite_border;
+  List<Place> buildPlaces(
+      List<DocumentSnapshot> placesListSnapshot, User user) {
+    List<Place> places = [];
     placesListSnapshot.forEach((p) {
-      placesCard.add(CardImageWithFabIcon(
-          pathImage: p.data()["urlImage"],
-          width: width,
-          left: left,
-          height: height,
-          iconData: iconData,
-          onPressedFabIcon: () {}));
+      Place place = Place(
+          id: p.id,
+          name: p.data()["name"],
+          description: p.data()["description"],
+          urlImage: p.data()["urlImage"],
+          likes: p.data()["likes"]);
+      List usersLikedRefs = p.data()["usersLiked"];
+      place.liked = false;
+      usersLikedRefs?.forEach((drUL) {
+        if (user.uid == drUL.id) {
+          place.liked = true;
+        }
+      });
+      places.add(place);
     });
-    return placesCard;
+    return places;
+  }
+
+  Future likePlace(Place place, String uid) async {
+    await _db
+        .collection(PLACES)
+        .doc(place.id)
+        .get()
+        .then((DocumentSnapshot ds) {
+      int likes = ds.data()["likes"];
+      _db.collection(PLACES).doc(place.id).update({
+        'likes': place.liked ? likes + 1 : likes - 1,
+        'usersLiked': place.liked
+            // ignore: unnecessary_brace_in_string_interps
+            ? FieldValue.arrayUnion([_db.doc("${USERS}/${uid}")])
+            // ignore: unnecessary_brace_in_string_interps
+            : FieldValue.arrayRemove([_db.doc("${USERS}/${uid}")])
+      });
+    });
   }
 }

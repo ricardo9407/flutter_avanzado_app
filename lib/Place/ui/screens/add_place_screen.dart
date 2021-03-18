@@ -67,36 +67,33 @@ class _AddPlaceScreen extends State<AddPlaceScreen> {
             child: ListView(
               children: <Widget>[
                 Container(
-                  alignment: Alignment.center,
-                  child: CardImageWithFabIcon(
-                      pathImage: widget.image.path,
-                      width: 400.0,
-                      height: 250.0,
-                      left: 0.1,
-                      iconData: Icons.camera_alt,
-                      onPressedFabIcon: null),
-                ),
+                    alignment: Alignment.center,
+                    child: CardImageWithFabIcon(
+                        pathImage: widget.image.path,
+                        width: 400.0,
+                        height: 250.0,
+                        left: 0.1,
+                        iconData: Icons.camera_alt,
+                        onPressedFabIcon: null,
+                        internet: false)),
                 Container(
-                  margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
-                  child: TextInput(
-                    hintText: "Title",
-                    inputType: null,
-                    maxLine: 1,
-                    controller: _controllerTitlePlace,
-                  ),
-                ),
+                    margin: EdgeInsets.only(top: 20.0, bottom: 20.0),
+                    child: TextInput(
+                        hintText: "Title",
+                        inputType: null,
+                        maxLine: 1,
+                        controller: _controllerTitlePlace)),
                 TextInput(
                     hintText: "Description",
                     inputType: TextInputType.multiline,
                     maxLine: 4,
                     controller: _controllerDescriptionPlace),
                 Container(
-                  margin: EdgeInsets.only(top: 20.0),
-                  child: TextInputLocation(
-                      hintText: "Add Location",
-                      iconData: Icons.location_on,
-                      controller: null),
-                ),
+                    margin: EdgeInsets.only(top: 20.0),
+                    child: TextInputLocation(
+                        hintText: "Add Location",
+                        iconData: Icons.location_on,
+                        controller: null)),
                 Container(
                   width: 70.0,
                   child: ButtonPurple(

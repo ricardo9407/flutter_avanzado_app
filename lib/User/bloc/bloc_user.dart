@@ -1,9 +1,9 @@
+import 'dart:async';
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_avanzado_app/Place/model/place.dart';
 import 'package:flutter_avanzado_app/Place/repository/firebase_storage_repository.dart';
-import 'package:flutter_avanzado_app/Place/ui/widget/card_image.dart';
 import 'package:flutter_avanzado_app/User/model/user.dart' as Model;
 import 'package:flutter_avanzado_app/User/repository/cloud_firestore_api.dart';
 import 'package:flutter_avanzado_app/User/repository/cloud_firestore_repository.dart';
@@ -45,9 +45,11 @@ class UserBloc implements Bloc {
       .collection(CloudFirestoreAPI().PLACES)
       .snapshots();
   Stream<QuerySnapshot> get placesStream => placesListStream;
-  List<CardImageWithFabIcon> buildPlaces(
-          List<DocumentSnapshot> placesListSnapshot) =>
-      _cloudFirestoreRepository.buildPlaces(placesListSnapshot);
+  List<Place> buildPlaces(
+          List<DocumentSnapshot> placesListSnapshot, Model.User user) =>
+      _cloudFirestoreRepository.buildPlaces(placesListSnapshot, user);
+  Future likePlace(Place place, String uid) =>
+      _cloudFirestoreRepository.likePlace(place, uid);
   Stream<QuerySnapshot> myPlacesListStream(String uid) =>
       FirebaseFirestore.instance
           .collection(CloudFirestoreAPI().PLACES)
@@ -58,6 +60,10 @@ class UserBloc implements Bloc {
           .snapshots();
   List<ProfilePlace> buildMyPlaces(List<DocumentSnapshot> placesSnapshot) =>
       _cloudFirestoreRepository.buildMyPlaces(placesSnapshot);
+  StreamController<Place> placeSelectedStreamController =
+      StreamController<Place>();
+  Stream<Place> get placeSelectedStream => placeSelectedStreamController.stream;
+  StreamSink<Place> get placeSelectedSink => placeSelectedStreamController.sink;
 
   final _firebaseStorageRepository = FirebaseStorageRepository();
   uploadFile(String path, File image) =>
@@ -67,5 +73,6 @@ class UserBloc implements Bloc {
   void dispose() {
     // ignore: todo
     // TODO: implement dispose
+    placeSelectedStreamController.close();
   }
 }
