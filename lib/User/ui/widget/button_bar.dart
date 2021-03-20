@@ -15,38 +15,36 @@ class ButtonsBar extends StatelessWidget {
     userBloc = BlocProvider.of(context);
     return Padding(
         padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
-        child: Row(
-          children: <Widget>[
-            //Cambiar contraseña
-            CircleButton(true, Icons.vpn_key, 20.0,
-                Color.fromRGBO(255, 255, 255, 0.6), () => {}),
-            //Añadir nuevo lugar
-            CircleButton(
-                false, Icons.add, 40.0, Color.fromRGBO(255, 255, 255, 1), () {
-              // ignore: invalid_use_of_visible_for_testing_member
-              ImagePicker.platform
-                  .pickImage(source: ImageSource.camera)
-                  .then((PickedFile image) {
-                //Se valida la imagen
-                if (image != null) {
-                  //Si se obtiene una imagen se abre la pantalla de AddPlaceScreen
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (BuildContext context) =>
-                              AddPlaceScreen(image: File(image.path))));
-                } else {
-                  //En el caso contrario se vuelve a ProfileTrips
-                  ProfileTrips();
-                }
-              })
-                  // ignore: return_of_invalid_type_from_catch_error
-                  .catchError((onError) => print(onError));
-            }),
-            //Cerrar sesión
-            CircleButton(true, Icons.exit_to_app, 20.0,
-                Color.fromRGBO(255, 255, 255, 0.6), () => {userBloc.signOut()}),
-          ],
-        ));
+        child: Row(children: <Widget>[
+          //Cambiar contraseña
+          CircleButton(true, Icons.vpn_key, 20.0,
+              Color.fromRGBO(255, 255, 255, 0.6), () => {}),
+          //Añadir nuevo lugar
+          CircleButton(false, Icons.add, 40.0, Color.fromRGBO(255, 255, 255, 1),
+              () {
+            // ignore: invalid_use_of_visible_for_testing_member
+            ImagePicker.platform
+                .pickImage(source: ImageSource.camera)
+                .then((PickedFile image) {
+              //Se valida la imagen
+              if (image != null) {
+                //Si se obtiene una imagen se abre la pantalla de AddPlaceScreen
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (BuildContext context) =>
+                            AddPlaceScreen(image: File(image.path))));
+              } else {
+                //En el caso contrario se vuelve a ProfileTrips
+                ProfileTrips();
+              }
+            })
+                // ignore: return_of_invalid_type_from_catch_error
+                .catchError((onError) => print(onError));
+          }),
+          //Cerrar sesión
+          CircleButton(true, Icons.exit_to_app, 20.0,
+              Color.fromRGBO(255, 255, 255, 0.6), () => {userBloc.signOut()}),
+        ]));
   }
 }

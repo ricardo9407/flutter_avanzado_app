@@ -32,56 +32,46 @@ class _SignInScreen extends State<SignInScreen> {
   // ignore: unused_element
   Widget _handleCurrentSession() {
     return StreamBuilder(
-      stream: userBloc.authStatus,
-      builder: (BuildContext context, AsyncSnapshot snapshot) {
-        //snapshot- data- Object USer
-        if (!snapshot.hasData || snapshot.hasError) {
-          return signInGoogleUI();
-        } else {
-          return PlatziTripsCupertino();
-        }
-      },
-    );
+        stream: userBloc.authStatus,
+        builder: (BuildContext context, AsyncSnapshot snapshot) {
+          //snapshot- data- Object USer
+          if (!snapshot.hasData || snapshot.hasError) {
+            return signInGoogleUI();
+          } else {
+            return PlatziTripsCupertino();
+          }
+        });
   }
 
   Widget signInGoogleUI() {
     return Scaffold(
-      body: Stack(
-        alignment: Alignment.center,
-        children: <Widget>[
-          GradientBack(height: null),
-          Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget>[
-              Flexible(
-                child: Container(
-                  width: screenWidth,
-                  child: TitleHeader(
-                      title: "Welcome\nThis is your Travel App",
-                      tamanio: 40.0,
-                      padding:
-                          EdgeInsets.only(top: 45.0, left: 20.0, right: 10.0)),
-                ),
-              ),
-              ButtonGreen(
-                text: "Login with Gmail",
-                onPressed: () {
-                  userBloc.signOut();
-                  userBloc.signIn().then((User user) {
-                    userBloc.updateUserData(Model.User(
-                        uid: user.uid,
-                        name: user.displayName,
-                        email: user.email,
-                        photoURL: user.photoURL));
-                  });
-                },
-                width: 300.0,
-                height: 50.0,
-              )
-            ],
-          )
-        ],
-      ),
-    );
+        body: Stack(alignment: Alignment.center, children: <Widget>[
+      GradientBack(height: null),
+      Column(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[
+        Flexible(
+            child: Container(
+                width: screenWidth,
+                child: TitleHeader(
+                    title: "Welcome\nThis is your Travel App",
+                    tamanio: 40.0,
+                    padding:
+                        EdgeInsets.only(top: 45.0, left: 20.0, right: 10.0)))),
+        ButtonGreen(
+          text: "Login with Gmail",
+          onPressed: () {
+            userBloc.signOut();
+            userBloc.signIn().then((User user) {
+              userBloc.updateUserData(Model.User(
+                  uid: user.uid,
+                  name: user.displayName,
+                  email: user.email,
+                  photoURL: user.photoURL));
+            });
+          },
+          width: 300.0,
+          height: 50.0,
+        )
+      ])
+    ]));
   }
 }

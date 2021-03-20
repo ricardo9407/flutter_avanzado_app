@@ -31,21 +31,19 @@ class _PlatziTrips extends State<PlatziTrips> {
     // ignore: todo
     // TODO: implement build
     return Scaffold(
-      body: widgetsChildren[indexTap],
-      bottomNavigationBar: Theme(
-        data: Theme.of(context)
-            .copyWith(canvasColor: Colors.white, primaryColor: Colors.purple),
-        child: BottomNavigationBar(
-            onTap: onTapTapped,
-            currentIndex: indexTap,
-            showSelectedLabels: false,
-            showUnselectedLabels: false,
-            items: [
-              BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
-              BottomNavigationBarItem(icon: Icon(Icons.search), label: ""),
-              BottomNavigationBarItem(icon: Icon(Icons.person), label: ""),
-            ]),
-      ),
-    );
+        body: widgetsChildren[indexTap],
+        bottomNavigationBar: Theme(
+            data: Theme.of(context).copyWith(
+                canvasColor: Colors.white, primaryColor: Colors.purple),
+            child: BottomNavigationBar(
+                onTap: onTapTapped,
+                currentIndex: indexTap,
+                showSelectedLabels: false,
+                showUnselectedLabels: false,
+                items: [
+                  BottomNavigationBarItem(icon: Icon(Icons.home), label: ""),
+                  BottomNavigationBarItem(icon: Icon(Icons.search), label: ""),
+                  BottomNavigationBarItem(icon: Icon(Icons.person), label: "")
+                ])));
   }
 }

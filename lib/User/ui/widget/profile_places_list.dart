@@ -14,10 +14,10 @@ class ProfilePlacesList extends StatelessWidget {
   Widget build(BuildContext context) {
     userBloc = BlocProvider.of<UserBloc>(context);
     return Container(
-      height: 450.0,
-      margin: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0, bottom: 10.0),
-      child: ListView(
-        children: <Widget>[
+        height: 450.0,
+        margin:
+            EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0, bottom: 10.0),
+        child: ListView(children: <Widget>[
           StreamBuilder<QuerySnapshot>(
               stream: userBloc.myPlacesListStream(user.uid),
               // ignore: missing_return
@@ -38,8 +38,6 @@ class ProfilePlacesList extends StatelessWidget {
                         children: userBloc.buildMyPlaces(snapshot.data.docs));
                 }
               })
-        ],
-      ),
-    );
+        ]));
   }
 }

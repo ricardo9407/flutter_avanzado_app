@@ -6,8 +6,6 @@ class SearchTrips extends StatelessWidget {
   Widget build(BuildContext context) {
     // ignore: todo
     // TODO: implement build
-    return Stack(children: <Widget>[
-      GradientBack(height: null),
-    ]);
+    return Stack(children: <Widget>[GradientBack(height: null)]);
   }
 }

@@ -14,15 +14,12 @@ class TitleHeader extends StatelessWidget {
     // ignore: todo
     // TODO: implement build
     return Container(
-      padding: padding,
-      child: Text(
-        title,
-        style: TextStyle(
-            color: Colors.white,
-            fontSize: tamanio,
-            fontFamily: "Lato",
-            fontWeight: FontWeight.bold),
-      ),
-    );
+        padding: padding,
+        child: Text(title,
+            style: TextStyle(
+                color: Colors.white,
+                fontSize: tamanio,
+                fontFamily: "Lato",
+                fontWeight: FontWeight.bold)));
   }
 }

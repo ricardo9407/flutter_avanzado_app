@@ -62,27 +62,24 @@ class _CardImageList extends State<CardImageList> {
     IconData iconDataLiked = Icons.favorite;
     IconData iconDataLike = Icons.favorite_border;
     return ListView(
-      padding: EdgeInsets.only(left: 10.0, bottom: 25.0),
-      scrollDirection: Axis.horizontal,
-      children: places.map((place) {
-        return GestureDetector(
-          onTap: () {
-            print("CLICK PLACE: ${place.name}");
-            userBloc.placeSelectedSink.add(place);
-          },
-          child: CardImageWithFabIcon(
-            pathImage: place.urlImage,
-            width: 350.0,
-            left: 20.0,
-            height: 250.0,
-            iconData: place.liked ? iconDataLiked : iconDataLike,
-            onPressedFabIcon: () {
-              setLiked(place);
-            },
-            internet: true,
-          ),
-        );
-      }).toList(),
-    );
+        padding: EdgeInsets.only(left: 10.0, bottom: 25.0),
+        scrollDirection: Axis.horizontal,
+        children: places.map((place) {
+          return GestureDetector(
+              onTap: () {
+                print("CLICK PLACE: ${place.name}");
+                userBloc.placeSelectedSink.add(place);
+              },
+              child: CardImageWithFabIcon(
+                  pathImage: place.urlImage,
+                  width: 350.0,
+                  left: 20.0,
+                  height: 250.0,
+                  iconData: place.liked ? iconDataLiked : iconDataLike,
+                  onPressedFabIcon: () {
+                    setLiked(place);
+                  },
+                  internet: true));
+        }).toList());
   }
 }
